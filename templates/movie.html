@@ -1,0 +1,122 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>영화추천</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../static/css/star_rating.css" />
+        <script type="text/javascript">
+            function radio_chk() {
+                //라디오 버튼 Name 가져오기
+                var radio_btn = document.getElementsByName("radio_btn");
+         
+                //라디오 버튼이 체크되었나 확인하기 위한 변수
+                var radio_btn_check = 0;
+                for(var i = 0; i<radio_btn.length; i++){
+                    //만약 라디오 버튼이 체크가 되어있다면 true
+                    if(radio_btn[i].checked==true){
+                        //라디오 버튼 값
+                        alert(radio_btn[i].value);
+                        //라디오 버튼이 체크되면 radio_btn_check를 1로 만들어준다.
+                        radio_btn_check++;
+                        console.log(radio_btn);
+                    }
+                }
+                if(radio_btn_check==0){
+                    alert("별점을 선택해주세요");
+                    return;
+                }
+            }
+        </script>
+        <script>
+            function rating()
+            {
+                $.ajax
+                ({
+                    url:'/coll/movie',
+                    contentType: 'application/json',
+                    method:'POST',
+                    data: JSON.stringify
+                    ({
+                        userid : $("#{{userid}}").val
+                    })
+                })
+            }
+        </script>
+        <script>
+            $(function(){
+                $("#member").on("submit",function(){
+                    var d = $(this).serialize();
+                    $.ajax({
+                        url : '/coll/movie',
+                        contentType : 'application/json',
+                        method :'GET',
+                        data : JSON.stringify({
+                        score : $(this).serialize()
+                        }),
+                        succeess:function(data){
+                            window.location='/coll/movie';
+                        }
+                    });
+                })
+            })
+        </script>
+    </head>
+    <body>
+        {% if session %}
+        {% if userid %}
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">{{ userid }}님,안녕하세요!</a>
+        {% endif %}
+        {% endif %}
+
+        <h4>영화추천점여..</h4>
+        {% if random_movie %}
+        <div class="card-columns">    
+            {% for movie_lists in random_movie %}
+            <div class="card mb-3" style="overflow:scroll; max-width: 400px; height:300px;"> 
+                <div class="row no-gutters">
+
+                    <div class="col-md-4">
+                        <img src= {{movie_lists.img_src}} class="card-img" alt="영화 포스터" style="width:120px; height:180px;" />
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <div class="card-title" style="font-size:medium">{{movie_lists.title}}</div>
+                            <div class="card-title" style="font-size:x-small">개봉연도 : {{movie_lists.prd_year|round_filter_zero}}</div>
+                            <div class="card-title" style="font-size:x-small">장르 : {{movie_lists.genre}}</div>
+                            <div class="card-title" style="font-size:x-small">감독 : {{movie_lists.director}}</div>
+                            <div class="card-title" style="font-size:x-small">배우 : {{movie_lists.actor}}</div>
+                            <div class="card-title" style="font-size:x-small">평점 : {{movie_lists.mean_rating|round_filter}}</div>
+                            <div class="card-title" style="font-size:x-small">줄거리 : {{movie_lists.story}}</div>
+                        </div>
+                        <form method="POST" action="/coll/movie">
+                            <p class="card-text">
+                                <a>별점점여..</a>
+                                <!-- <h6>별점점여..</h6> -->
+                                <fieldset class="rating">
+                                    <input type="radio" id="star10" name="rating" value="10" /><label class = "full" for="star10" title="Awesome - 10 stars"></label>
+                                    <input type="radio" id="star9" name="rating" value="9" /><label class="half" for="star9" title="Pretty good - 9 stars"></label>
+                                    <input type="radio" id="star8" name="rating" value="8" /><label class = "full" for="star8" title="Pretty good - 8 stars"></label>
+                                    <input type="radio" id="star7" name="rating" value="7" /><label class="half" for="star7" title="Meh - 7 stars"></label>
+                                    <input type="radio" id="star6" name="rating" value="6" /><label class = "full" for="star6" title="Meh - 6 stars"></label>
+                                    <input type="radio" id="star5" name="rating" value="5" /><label class="half" for="star5" title="Kinda bad - 5 stars"></label>
+                                    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Kinda bad - 4 stars"></label>
+                                    <input type="radio" id="star3" name="rating" value="3" /><label class="half" for="star3" title="Meh - 3 stars"></label>
+                                    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Sucks big time - 2 star"></label>
+                                    <input type="radio" id="star1" name="rating" value="1" /><label class="half" for="star1" title="Sucks big time - 1 stars"></label>
+                                </fieldset><br>
+                            <input type="submit" value="확인"/>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+        {% endif %}        
+    </body>
+</html>
