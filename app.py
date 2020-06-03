@@ -8,13 +8,15 @@ from model import collection_movie,collection_user
 from control_jinja import basename, filter_content,movie_content, round_filter, round_filter_zero
 from recom.recom import recom
 from collaborate.collaborate import collaborate
-
+from transformer.chat import chat
 
 app = Flask(__name__)
 
 app.register_blueprint(users, url_prefix='/user')
 app.register_blueprint(recom, url_prefix='/recom')
 app.register_blueprint(collaborate, url_prefix='/coll')
+app.register_blueprint(chat, url_prefix='/chat')
+
 
 app.add_template_filter(basename)
 app.add_template_filter(filter_content)
@@ -51,7 +53,3 @@ def register():
 @app.route('/content',methods=['GET','POST'])
 def content():
     return render_template('content.html')
-
-@app.route('/test')
-def test():
-    return render_template('test.html')
