@@ -36,24 +36,29 @@ def coll():
 
 @collaborate.route('/movie', methods=['GET','POST'])
 def movie(charset='utf-8'):
-    if request.method == 'GET':
-        userid = session.get('userid',None)
+    if request.method == 'GET': # 랜덤 영화 별점 매기기 페이지 보여줌
+        userid = session.get('userid',None) # 사용자 이름 갖고오기
         
-        if userid:
-            user_data = list(collection_user_info.find({'user_id':userid},{'_id':0}))
-            find_movie_json = json.dumps(user_data, default=json_util.default) #userid가 평가한 movie
-            find_movie = json.loads(find_movie_json)
+        if userid: # 유저가 있을 경우
+            
+            user_data = list(collection_user_info.find({'user_id':userid},{'_id':0})) # 해당유저의 정보를 갖고오자
+            find_movie_json = json.dumps(user_data, default=json_util.default) #userid가 평가한 movie // string -> json
+            find_movie = json.loads(find_movie_json) # unicode_error 변환 
 
             movie_code_list = []
-            for mv_code in find_movie:
-                movie_code_list.append(int(mv_code['movie_code']))
-
+            for mv_code in find_movie: #[{},{},{}]
+                movie_code_list.append(int(mv_code['movie_code'])) # dict 안에서 key값이 movie_code인 value값을 찾아가지고, movie_code_list에 넣어줌
+            
+            # index_range : np.random.choice안에 iterable한 변수를 넣는데, 이제 시작값이 0부터가지고 range함수써서 1부터 시작하게 만듬
+            # range함수는 마지막인덱스가 제외되니깐 +1해줌
             index_range = list(range(1,movie_total_count+1))
+
+            # 평가한 영화가 존재할 경우
             if movie_code_list:
                 for data in movie_code_list:
-                    # print(data)
-                    if data in index_range:
-                        index_range.remove(data)
+                    if data in index_range: # 범위안에 평가한 영화코드가 있을 경우
+                        index_range.remove(data)  # 평가한 영화코드를 제거해줌
+            # 평가한 영화가 없을 경우
             else:
                 index_range = range(1,movie_total_count+1)
 
@@ -77,7 +82,7 @@ def movie(charset='utf-8'):
 
             return render_template('movie.html', random_movie=random_movie,userid=userid) 
         
-        return render_template('movie.html')    
+        return render_template('movie.html')    # 유저가 없을 경우
     
     else:
         userid = session.get('userid',None)
