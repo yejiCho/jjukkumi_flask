@@ -3,8 +3,8 @@
 import tensorflow as tf
 import numpy as np
 
-from model import transformer
-from data import DataProcess
+from transformer.model import transformer
+from transformer.data import DataProcess
 
 
 MAX_LENGTH = 50
@@ -26,7 +26,7 @@ model = transformer(
     , dropout=DROPOUT
 )
 
-model.load_weights('./transformer_weights_10.h5')
+model.load_weights('./transformer/transformer_weights_10.h5')
 
 
 def evaluate(sentence):
