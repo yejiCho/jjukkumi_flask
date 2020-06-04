@@ -37,37 +37,26 @@ def coll():
 @collaborate.route('/movie', methods=['GET','POST'])
 def movie(charset='utf-8'):
     if request.method == 'GET':
-        # userid = session.get('userid',None)
-        userid = 'douen'
+        userid = session.get('userid',None)
+        
         if userid:
-            user_data = collection_user_info.find({'user_id':userid},{'_id':0,'userid':0,'socre':0})
-            # doc_list = list(user_data)
-            # find_movie = json.dumps(doc_list, default=json_util.default) #userid가 평가한 movie
-            index_range = range(1,movie_total_count+1) 
-            # if find_movie: # user가 평가한영화가 있을 경우
-            #     movie_code_list = [] # user가 평가한 movie_code
-            #     for data in find_movie:
-            #         # print(data['movie_code'])
-            #         # movie_code = data['movie_code']
-            #         movie_code_list.append(int(data['movie_code'])) 
+            user_data = list(collection_user_info.find({'user_id':userid},{'_id':0}))
+            find_movie_json = json.dumps(user_data, default=json_util.default) #userid가 평가한 movie
+            find_movie = json.loads(find_movie_json)
 
-            #     for code_index in movie_code_list:
-            #         if code_index in index_range:
-            #             index_range.remove(code_index) # user가 평가한 movie_code삭제
-                
-            #     all_movie_code = index_range
+            movie_code_list = []
+            for mv_code in find_movie:
+                movie_code_list.append(int(mv_code['movie_code']))
 
-            # else:   # user가 평가한 영화가 없을경우
-                
-                # all_movie_code = range(1,movie_total_count+1)
-            
-            print(user_data['movie_code'])
-            # print(find_movie)
-            # for data in find_movie:
-                # print(data['movie_code'])
-                # print(data['movie_code'])
-                # print(type(data['movie_code']))
-            
+            index_range = list(range(1,movie_total_count+1))
+            if movie_code_list:
+                for data in movie_code_list:
+                    # print(data)
+                    if data in index_range:
+                        index_range.remove(data)
+            else:
+                index_range = range(1,movie_total_count+1)
+
             random_movie = []
             random_list = np.random.choice(index_range,10,replace=False)
             for random_index in random_list.tolist():
@@ -100,7 +89,7 @@ def movie(charset='utf-8'):
         print(info_data[1])
         total = {
             'movie_code':info_data[0],
-            'userid' : userid,
+            'user_id' : userid,
             'score' : info_data[1]
         }
 
