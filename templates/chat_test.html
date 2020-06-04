@@ -88,7 +88,6 @@
         <button type="button" class="btn btn-primary" onclick="search_movie();">질문</button>
     </form>
 
-    {% if question %}
     {% if answer %}
     <div class="container">
     <p>{{question}}</p>
@@ -97,8 +96,7 @@
     <p>{{answer}}</p>
     </div>
     {% endif %}
-    {% endif %}
-
+    
 </body>
 
 </html>

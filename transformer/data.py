@@ -9,7 +9,7 @@ class DataProcess:
     '''데이터 처리를 담당하는 클래스'''
     
     def __init__(self,
-                 vocab_path="./vocbulary.voc",
+                 vocab_path="./transformer/vocbulary.voc",
                  tagger=Mecab()):
         # tagger: 형태소 분석기 -> Mecab() (default)
         self.tagger = tagger

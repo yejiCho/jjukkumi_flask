@@ -86,12 +86,8 @@ def movie(charset='utf-8'):
     
     else:
         userid = session.get('userid',None)
-        # data = request.form
         data = request.form['rating']
         info_data = data.split(',')
-        print(userid)
-        print(info_data[0])
-        print(info_data[1])
         total = {
             'movie_code':info_data[0],
             'user_id' : userid,
