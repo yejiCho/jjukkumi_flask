@@ -14,10 +14,7 @@ def chat_sentence():
         global json_test_content
         global movie_name
         data = request.get_json()
-        # data = request.form
-        print(data)
         movie_name = data.get('sentence')
-        # print(movie_name)
         movie_code = input_movie(movie_name)
         json_test_code = movie_code.to_json()
         json_test_content = json.loads(json_test_code)
