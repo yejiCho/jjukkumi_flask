@@ -44,6 +44,22 @@ def movie(charset='utf-8'):
             # doc_list = list(user_data)
             # find_movie = json.dumps(doc_list, default=json_util.default) #userid가 평가한 movie
             index_range = range(1,movie_total_count+1) 
+            # if find_movie: # user가 평가한영화가 있을 경우
+            #     movie_code_list = [] # user가 평가한 movie_code
+            #     for data in find_movie:
+            #         # print(data['movie_code'])
+            #         # movie_code = data['movie_code']
+            #         movie_code_list.append(int(data['movie_code'])) 
+
+            #     for code_index in movie_code_list:
+            #         if code_index in index_range:
+            #             index_range.remove(code_index) # user가 평가한 movie_code삭제
+                
+            #     all_movie_code = index_range
+
+            # else:   # user가 평가한 영화가 없을경우
+                
+                # all_movie_code = range(1,movie_total_count+1)
             
             print(user_data['movie_code'])
             # print(find_movie)
