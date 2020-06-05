@@ -127,11 +127,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
+/
 #.vscode
 .vscode
 
-# .pickle, .csv
+# .pickle, .csv, .png
 *.pickle
 *.csv
 *.png
