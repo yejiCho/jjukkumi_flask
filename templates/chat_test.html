@@ -88,17 +88,15 @@
         <button type="button" class="btn btn-primary" onclick="search_movie();">질문</button>
     </form>
 
-    {% if question %}
-    {% if answer %}
+    {% for qu,an in zip(question,answer) %}
+    
     <div class="container">
-    <p>{{question}}</p>
+    <p>{{qu}}</p>
     </div>
     <div class="container darker">
-    <p>{{answer}}</p>
+    <p>{{an}}</p>
     </div>
-    {% endif %}
-    {% endif %}
-
+    {% endfor %} 
 </body>
 
 </html>

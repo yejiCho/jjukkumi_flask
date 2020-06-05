@@ -16,6 +16,7 @@ app.register_blueprint(users, url_prefix='/user')
 app.register_blueprint(recom, url_prefix='/recom')
 app.register_blueprint(collaborate, url_prefix='/coll')
 app.register_blueprint(chat, url_prefix='/chat')
+app.jinja_env.globals.update(zip=zip)
 
 
 app.add_template_filter(basename)
