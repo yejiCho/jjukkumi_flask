@@ -1,9 +1,6 @@
 from seq2seq.data import DataProcess
 from keras.models import load_model
 from keras.models import Model, Input
-# from seq2seq.data import DataProcess
-# from keras.models import load_model
-# from keras.models import Model, Input
 import numpy as np
 
 class Seq2seq:

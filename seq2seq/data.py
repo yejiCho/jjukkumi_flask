@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from konlpy.tag import Mecab
 import re
 import os

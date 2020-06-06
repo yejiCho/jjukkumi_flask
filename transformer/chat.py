@@ -3,7 +3,6 @@ from bson import json_util
 import json
 from transformer.main import predict
 
-
 chat = Blueprint('chat', __name__, template_folder='templates')
 
 
@@ -25,4 +24,6 @@ def chat_sentence():
         userid = session.get('userid',None)
         
         return render_template('transformer.html',question=question,answer=answer,zip=zip,userid=userid)
+ 
+
  

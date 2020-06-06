@@ -1,7 +1,3 @@
-# from seq2seq.model import Seq2seq
-# # from seq2seq.model import Seq2seq
-# from seq2seq.data import DataProcess
-# from seq2seq.spacing import sentence_spacing
 from seq2seq.model import Seq2seq
 from seq2seq.data import DataProcess
 from seq2seq.spacing import sentence_spacing
