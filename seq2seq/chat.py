@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template, jsonify, request, session
-from app import app
 from seq2seq.main import run
 
 seq_chat = Blueprint('seq_chat',__name__,template_folder='templates')
@@ -10,19 +9,22 @@ answer = []
 def chat_sentence():
         
     if request.method == 'POST':
-        from seq2seq.main import run
         global answer
         global question
+
         data = request.get_json()
         sentence = data.get('sentence')
-        question.append(sentence)
-        # bot_answer = run('hi')
         bot_answer = run(sentence)
-        print(type(bot_answer))
-        print(bot_answer)
+        question.append(sentence)
+        bot_answer = run(sentence)
         answer.append(bot_answer)
-        print(answer)
-        return answer
+
+        answer_bot = {
+            'answer' : bot_answer
+        }
+
+        return jsonify(answer_bot)
+        
     
     elif request.method == 'GET':
 
