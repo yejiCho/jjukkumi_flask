@@ -32,12 +32,15 @@
     function chat(){
       window.location='/chat/chat';
     }
+    function seq_chat(){
+      window.location='/seq_chat/'
+    }
   </script>
 </head>
 <body>
     <div class="container">
     <div class="row mt-5">
-        <h1>home</h1>
+        <h1>쭈꾸미가 와따네</h1>
     </div>
       <div class="col-12">
       <ul class="nav">
@@ -63,19 +66,21 @@
     </div>
     {% if userid %}
     <div class="col-md-3">
-    <button type="button" class="btn btn-secondary" onclick="chat();">chatting</button>
-    <button type="button" class="btn btn-secondary" onclick="content();">content</button>
-    <button type="button" class="btn btn-secondary" onclick="coll();">collaborative</button>
-    <button type="button" class="btn btn-secondary" onclick="avg();">영화추천</button>
+    <button type="button" class="btn btn-secondary" onclick="chat();">옵티머스프라임과 대화하기</button>
+    <button type="button" class="btn btn-secondary" onclick="seq_chat();">범블비와 대화하기</button>
+    <button type="button" class="btn btn-secondary" onclick="content();">영화 검색하기</button>
+    <button type="button" class="btn btn-secondary" onclick="coll();">영화 평가하기</button>
+    <button type="button" class="btn btn-secondary" onclick="avg();">콜라보 기반영화추천</button>
     
     {% endif %}
 
     {% if not userid %}
     <div class="col-md-3">
-    <button type="button" class="btn btn-outline-primary" onclick="login();">chatting</button>
-    <button type="button" class="btn btn-outline-secondary" onclick="login();">content</button>
-    <button type="button" class="btn btn-outline-primary" onclick="login();">collaborative</button>
-    <button type="button" class="btn btn-outline-primary" onclick="login();">영화평점</button>
+    <button type="button" class="btn btn-outline-primary" onclick="login();">옵티머스프라임과 대화하기</button>
+    <button type="button" class="btn btn-secondary" onclick="seq_chat();">범블비와 대화하기</button>
+    <button type="button" class="btn btn-outline-secondary" onclick="login();">영화 검색하기</button>
+    <button type="button" class="btn btn-outline-primary" onclick="login();">영화 평가하기</button>
+    <button type="button" class="btn btn-outline-primary" onclick="login();">콜라보 기반영화추천</button>
     </div>
     {% endif %}
 </body>
