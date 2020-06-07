@@ -136,11 +136,6 @@ dmypy.json
 *.csv
 *.png
 
-<<<<<<< HEAD
-# wieght
+# .h5, .voc
 *.h5
 *.voc
-=======
-.h5
-.voc
->>>>>>> 8377fead6f3eeec56a5227dc1abaaf07ee990e0e
