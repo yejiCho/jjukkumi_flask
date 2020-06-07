@@ -47,7 +47,7 @@
         {% if random_movie %}
         <div class="card-columns">    
             {% for movie_lists in random_movie %}
-            <div class="card mb-3" style="overflow:scroll; max-width: 400px; height:300px;"> 
+            <div class="card mb-3" style="overflow:scroll; max-width: 590px; height:300px;"> 
                 <div class="row no-gutters">
 
                     <div class="col-md-4">
@@ -67,18 +67,19 @@
                         
                         <form method="POST" action="/coll/movie">
                             <p class="card-text">
-                                <a>별점점여..</a>
+                                <a>별점점여..(1점~10점)</a>
                                 <fieldset class="rating">
-                                    <input type="radio" id="star10" name="rating" value="{{movie_lists.movie_code}},10" /><label class = "full" for="star10" title="Awesome - 10 stars"></label>
-                                    <input type="radio" id="star9" name="rating" value="{{movie_lists.movie_code}},9" /><label class="half" for="star9" title="Pretty good - 9 stars"></label>
-                                    <input type="radio" id="star8" name="rating" value="{{movie_lists.movie_code}},8" /><label class = "full" for="star8" title="Pretty good - 8 stars"></label>
-                                    <input type="radio" id="star7" name="rating" value="{{movie_lists.movie_code}},7" /><label class="half" for="star7" title="Meh - 7 stars"></label>
-                                    <input type="radio" id="star6" name="rating" value="{{movie_lists.movie_code}},6" /><label class = "full" for="star6" title="Meh - 6 stars"></label>
-                                    <input type="radio" id="star5" name="rating" value="{{movie_lists.movie_code}},5" /><label class="half" for="star5" title="Kinda bad - 5 stars"></label>
-                                    <input type="radio" id="star4" name="rating" value="{{movie_lists.movie_code}},4" /><label class = "full" for="star4" title="Kinda bad - 4 stars"></label>
-                                    <input type="radio" id="star3" name="rating" value="{{movie_lists.movie_code}},3" /><label class="half" for="star3" title="Meh - 3 stars"></label>
-                                    <input type="radio" id="star2" name="rating" value="{{movie_lists.movie_code}},2" /><label class = "full" for="star2" title="Sucks big time - 2 star"></label>
                                     <input type="radio" id="star1" name="rating" value="{{movie_lists.movie_code}},1" /><label class="half" for="star1" title="Sucks big time - 1 stars"></label>
+                                    <input type="radio" id="star2" name="rating" value="{{movie_lists.movie_code}},2" /><label class = "full" for="star2" title="Sucks big time - 2 star"></label>
+                                    <input type="radio" id="star3" name="rating" value="{{movie_lists.movie_code}},3" /><label class="half" for="star3" title="Meh - 3 stars"></label>
+                                    <input type="radio" id="star4" name="rating" value="{{movie_lists.movie_code}},4" /><label class = "full" for="star4" title="Kinda bad - 4 stars"></label>
+                                    <input type="radio" id="star5" name="rating" value="{{movie_lists.movie_code}},5" /><label class="half" for="star5" title="Kinda bad - 5 stars"></label>
+                                    <input type="radio" id="star6" name="rating" value="{{movie_lists.movie_code}},6" /><label class = "full" for="star6" title="Meh - 6 stars"></label>
+                                    <input type="radio" id="star7" name="rating" value="{{movie_lists.movie_code}},7" /><label class="half" for="star7" title="Meh - 7 stars"></label>
+                                    <input type="radio" id="star8" name="rating" value="{{movie_lists.movie_code}},8" /><label class = "full" for="star8" title="Pretty good - 8 stars"></label>
+                                    <input type="radio" id="star9" name="rating" value="{{movie_lists.movie_code}},9" /><label class="half" for="star9" title="Pretty good - 9 stars"></label>
+                                    <input type="radio" id="star10" name="rating" value="{{movie_lists.movie_code}},10" /><label class = "full" for="star10" title="Awesome - 10 stars"></label>
+                                                       
                                 </fieldset><br>
                                 <input type="submit" value="확인"/>
                             </p>

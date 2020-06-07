@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-
 import tensorflow as tf
 import numpy as np
 
 from transformer.model import transformer
 from transformer.data import DataProcess
+from transformer.spacing import sentence_spacing
 
 
 MAX_LENGTH = 50
@@ -26,7 +26,7 @@ model = transformer(
     , dropout=DROPOUT
 )
 
-model.load_weights('./transformer/transformer_weights_10.h5')
+model.load_weights('./transformer/transformer_weights_27.h5')
 
 
 def evaluate(sentence):
@@ -62,5 +62,7 @@ def predict(sentence):
         dp.idx2word[word_idx]
         for word_idx in np.array(prediction)[1:]
     ])
+    
+    predicted_sentence = sentence_spacing(predicted_sentence.replace(' ', ''))
     
     return predicted_sentence

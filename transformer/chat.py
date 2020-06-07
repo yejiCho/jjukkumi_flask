@@ -1,12 +1,11 @@
-from flask import Blueprint, render_template, jsonify, request, redirect
+from flask import Blueprint, render_template, jsonify, request, redirect,session
 from bson import json_util
 import json
 from transformer.main import predict
 
 chat = Blueprint('chat', __name__, template_folder='templates')
 
-# answer =""
-# question = ""
+
 question = []
 answer = []
 @chat.route('/chat',methods=['GET','POST'])
@@ -22,6 +21,9 @@ def chat_sentence():
         return answer # 덮어씀 json_movie_content
 
     elif request.method == 'GET':
+        userid = session.get('userid',None)
         
-        return render_template('chat_test.html',question=question,answer=answer,zip=zip)
+        return render_template('transformer.html',question=question,answer=answer,zip=zip,userid=userid)
+ 
+
  

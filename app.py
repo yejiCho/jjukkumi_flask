@@ -9,6 +9,7 @@ from control_jinja import basename, filter_content,movie_content, round_filter, 
 from recom.recom import recom
 from collaborate.collaborate import collaborate
 from transformer.chat import chat
+from seq2seq.chat import seq_chat
 
 app = Flask(__name__)
 
@@ -16,6 +17,7 @@ app.register_blueprint(users, url_prefix='/user')
 app.register_blueprint(recom, url_prefix='/recom')
 app.register_blueprint(collaborate, url_prefix='/coll')
 app.register_blueprint(chat, url_prefix='/chat')
+app.register_blueprint(seq_chat, url_prefix='/seq_chat')
 app.jinja_env.globals.update(zip=zip)
 
 
@@ -26,7 +28,7 @@ app.add_template_filter(round_filter)
 app.add_template_filter(round_filter_zero)
 
 app.config['SECRET_KEY'] = 'THIS_IS_SECRET_KEY'
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 
 
 @app.route('/',methods=['GET'])
